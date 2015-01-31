@@ -60,6 +60,8 @@
                     android:id="@+id/seance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:transitionName="transition_date"
+                    android:textAppearance="@android:style/TextAppearance.Large"
                     tools:text="12 decembre"/>
 
                 <TextView

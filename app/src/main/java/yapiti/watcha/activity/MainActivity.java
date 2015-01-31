@@ -1,38 +1,17 @@
 package yapiti.watcha.activity;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
-import android.support.v4.app.ActivityOptionsCompat;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.util.Pair;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.os.Build;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import org.lucasr.twowayview.ItemClickSupport;
-import org.lucasr.twowayview.TwoWayLayoutManager;
-import org.lucasr.twowayview.widget.GridLayoutManager;
-import org.lucasr.twowayview.widget.SpacingItemDecoration;
-import org.lucasr.twowayview.widget.TwoWayView;
-
-import java.util.Date;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import yapiti.watcha.R;
-import yapiti.watcha.adapter.CoverAdapter;
-import yapiti.watcha.entity.Movie;
-import yapiti.watcha.entity.Seance;
 import yapiti.watcha.fragment.MovieFragment;
+import yapiti.watcha.fragment.SeanceFragment;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -65,7 +44,7 @@ public class MainActivity extends ActionBarActivity {
                     fragment= MovieFragment.newInstance();
                     break;
                 case 1:
-                    fragment= MovieFragment.newInstance();
+                    fragment= SeanceFragment.newInstance();
                     break;
                 default:
                     throw new IllegalStateException("Unsupported");

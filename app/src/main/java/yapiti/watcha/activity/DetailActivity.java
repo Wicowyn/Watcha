@@ -6,9 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.view.View;
 import android.view.Window;
@@ -80,7 +80,7 @@ public class DetailActivity extends ActionBarActivity {
         author.setText(movie.getAuthor());
         description.setText(movie.getDescription());
 
-        SimpleDateFormat df=new SimpleDateFormat("dd MMMM yyyy");
+        SimpleDateFormat df=new SimpleDateFormat("dd MMMM HH:ss");
         Seance seance=movie.getSeances().get(0);
 
         if(seance!=null) seanceView.setText(df.format(seance.getDate()));
