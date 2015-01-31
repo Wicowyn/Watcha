@@ -79,7 +79,7 @@ public class MovieFragment extends Fragment {
             movie.setTitle("Yolo"+i);
             movie.setAuthor("Author " + i);
             movie.setDescription("Omne omne et tunica circumdedit accepimus qua muros agebatur ablatis armatis ad Caesarem inopinum Caesarem peremptum res iurandi fallaciis sed et statim qua extra omne circumdedit iurandi confirmans communi iurandi.");
-            movie.setCover(Uri.parse("http://lorempixel.com/400/700/"));
+            movie.setCover(Uri.parse("http://lorempixel.com/400/70"+((int) (Math.random()*5))));
             movie.getSeances().add(new Seance(new Date()));
 
             adapter.add(movie);

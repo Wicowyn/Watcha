@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 
+import com.astuetz.PagerSlidingTabStrip;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import yapiti.watcha.R;
@@ -15,8 +17,8 @@ import yapiti.watcha.fragment.SeanceFragment;
 
 
 public class MainActivity extends ActionBarActivity {
-    @InjectView(R.id.view_pager)
-    ViewPager viewPager;
+    @InjectView(R.id.view_pager) ViewPager viewPager;
+    @InjectView(R.id.tabs) PagerSlidingTabStrip slidingTabStrip;
 
 
     @Override
@@ -27,6 +29,7 @@ public class MainActivity extends ActionBarActivity {
         ButterKnife.inject(this);
 
         viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
+        slidingTabStrip.setViewPager(viewPager);
     }
 
     private class FragmentAdapter extends FragmentPagerAdapter {
@@ -56,6 +59,18 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public int getCount() {
             return 2;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position){
+                case 0:
+                    return "Films";
+                case 1:
+                    return "Seances";
+                default:
+                    throw new IllegalStateException("Unsupported");
+            }
         }
     }
 }

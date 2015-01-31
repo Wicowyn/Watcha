@@ -76,10 +76,10 @@ public class SeanceFragment extends Fragment {
             movie.setTitle("Yolo"+i);
             movie.setAuthor("Author " + i);
             movie.setDescription("Omne omne et tunica circumdedit accepimus qua muros agebatur ablatis armatis ad Caesarem inopinum Caesarem peremptum res iurandi fallaciis sed et statim qua extra omne circumdedit iurandi confirmans communi iurandi.");
-            movie.setCover(Uri.parse("http://lorempixel.com/400/700/"));
+            movie.setCover(Uri.parse("http://lorempixel.com/400/70"+((int) (Math.random()*5))));
 
-            for(int j=(int) (Math.random()*3); j>0; j--)
-                movie.getSeances().add(new Seance(new Date((long) Math.random()*1422740489)));
+            for(int j=(int) (Math.random()*3.0); j>0; j--)
+                movie.getSeances().add(new Seance(new Date((long) (Math.random()*1422740489.0))));
 
             list.add(movie);
         }
@@ -129,7 +129,7 @@ public class SeanceFragment extends Fragment {
 
                     pairs[0]=new Pair<View, String>(textView, "transition_title");
                     pairs[1]=new Pair<View, String>(imageView, "transition_cover");
-                    pairs[2]=new Pair<View, String>(imageView, "transition_date");
+                    pairs[2]=new Pair<View, String>(dateTextView, "transition_date");
 
 
                     Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), pairs).toBundle();
