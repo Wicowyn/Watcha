@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import yapiti.watcha.R;
 import yapiti.watcha.entity.Movie;
+import yapiti.watcha.entity.Seance;
 import yapiti.watcha.tools.ViewHelper;
 
 
@@ -34,7 +35,7 @@ public class DetailActivity extends ActionBarActivity {
     @InjectView(R.id.big_cover) ImageView bigCover;
     @InjectView(R.id.image) ImageView imageView;
     @InjectView(R.id.title) TextView title;
-    @InjectView(R.id.seance) TextView seance;
+    @InjectView(R.id.seance) TextView seanceView;
     @InjectView(R.id.author) TextView author;
     @InjectView(R.id.synopsis )TextView description;
 
@@ -80,8 +81,9 @@ public class DetailActivity extends ActionBarActivity {
         description.setText(movie.getDescription());
 
         SimpleDateFormat df=new SimpleDateFormat("dd MMMM yyyy");
-        //seance.setText(movie.get);
+        Seance seance=movie.getSeances().get(0);
 
+        if(seance!=null) seanceView.setText(df.format(seance.getDate()));
 
 
         ViewHelper.waitLayoutLoad(imageView, new ViewHelper.LayoutChange() {

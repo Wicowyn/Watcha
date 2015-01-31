@@ -57,6 +57,9 @@ public class Movie implements Parcelable {
         this.description = description;
     }
 
+    public Movie() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -66,17 +69,21 @@ public class Movie implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.title);
         dest.writeParcelable(this.cover, 0);
-    }
-
-    public Movie() {
+        dest.writeString(this.author);
+        dest.writeString(this.description);
+        dest.writeList(this.seances);
     }
 
     private Movie(Parcel in) {
         this.title = in.readString();
         this.cover = in.readParcelable(Uri.class.getClassLoader());
+        this.author = in.readString();
+        this.description = in.readString();
+        this.seances=new ArrayList<>();
+        in.readList(seances, Seance.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
         public Movie createFromParcel(Parcel source) {
             return new Movie(source);
         }
