@@ -1,4 +1,4 @@
-package yapiti.watcha;
+package yapiti.watcha.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,14 +9,9 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
 import android.transition.AutoTransition;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,10 +19,11 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
 import java.io.ByteArrayOutputStream;
-import java.util.Locale;
+import java.text.SimpleDateFormat;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import yapiti.watcha.R;
 import yapiti.watcha.entity.Movie;
 import yapiti.watcha.tools.ViewHelper;
 
@@ -35,8 +31,12 @@ import yapiti.watcha.tools.ViewHelper;
 public class DetailActivity extends ActionBarActivity {
     private Movie movie;
 
+    @InjectView(R.id.big_cover) ImageView bigCover;
     @InjectView(R.id.image) ImageView imageView;
     @InjectView(R.id.title) TextView title;
+    @InjectView(R.id.seance) TextView seance;
+    @InjectView(R.id.author) TextView author;
+    @InjectView(R.id.synopsis )TextView description;
 
     private static final String ARG_MAIL="entity";
     private static final String PRE_LOADING_IMAGE="pre_image";
@@ -76,6 +76,13 @@ public class DetailActivity extends ActionBarActivity {
         ButterKnife.inject(this);
 
         title.setText(movie.getTitle());
+        author.setText(movie.getAuthor());
+        description.setText(movie.getDescription());
+
+        SimpleDateFormat df=new SimpleDateFormat("dd MMMM yyyy");
+        //seance.setText(movie.get);
+
+
 
         ViewHelper.waitLayoutLoad(imageView, new ViewHelper.LayoutChange() {
             @Override
@@ -91,6 +98,17 @@ public class DetailActivity extends ActionBarActivity {
                 }
 
                 requestCreator.into(imageView);
+            }
+        });
+
+        ViewHelper.waitLayoutLoad(bigCover, new ViewHelper.LayoutChange() {
+            @Override
+            public void done(View view) {
+                Picasso.with(DetailActivity.this)
+                        .load(movie.getCover())
+                        .resize(bigCover.getWidth(), bigCover.getHeight())
+                        .centerCrop()
+                        .into(bigCover);
             }
         });
     }

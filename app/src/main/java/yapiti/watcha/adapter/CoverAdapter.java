@@ -1,6 +1,7 @@
 package yapiti.watcha.adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import yapiti.watcha.R;
 import yapiti.watcha.entity.Movie;
 import yapiti.watcha.view.CoverView;
 
@@ -25,6 +27,11 @@ public class CoverAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        CoverView coverView=new CoverView(context);
+
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP)
+                coverView.setElevation(context.getResources().getDimension(R.dimen.cover_elevation));
+
         return new CoverHolder(new CoverView(context));
     }
 
