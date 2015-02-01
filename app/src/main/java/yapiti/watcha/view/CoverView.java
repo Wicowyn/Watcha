@@ -2,6 +2,7 @@ package yapiti.watcha.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -20,10 +21,8 @@ import yapiti.watcha.tools.ViewHelper;
  * Created by yapiti on 31/01/15.
  */
 public class CoverView extends FrameLayout {
-    @InjectView(R.id.image)
-    ImageView image;
-    @InjectView(R.id.title)
-    TextView title;
+    @InjectView(R.id.image) ImageView image;
+    @InjectView(R.id.title) TextView title;
 
 
     public CoverView(Context context) {
@@ -51,8 +50,11 @@ public class CoverView extends FrameLayout {
         ViewHelper.waitLayoutLoad(image,  new ViewHelper.LayoutChange() {
             @Override
             public void done(View view) {
+                Log.d("image", "w: "+image.getWidth()+" - "+image.getHeight());
                 Picasso.with(getContext()).load(movie.getCover())
-                    .into(image);
+                        .resize(image.getWidth(), image.getHeight())
+                        .centerCrop()
+                        .into(image);
             }
         });
     }

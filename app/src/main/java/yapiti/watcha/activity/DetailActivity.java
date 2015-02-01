@@ -1,5 +1,6 @@
 package yapiti.watcha.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -23,6 +24,7 @@ import java.text.SimpleDateFormat;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import yapiti.watcha.R;
 import yapiti.watcha.entity.Movie;
 import yapiti.watcha.entity.Seance;
@@ -109,11 +111,20 @@ public class DetailActivity extends ActionBarActivity {
             @Override
             public void done(View view) {
                 Picasso.with(DetailActivity.this)
-                        .load(movie.getCover())
+                        .load(movie.getBigCover() != null ? movie.getBigCover() : movie.getCover())
                         .resize(bigCover.getWidth(), bigCover.getHeight())
                         .centerCrop()
                         .into(bigCover);
             }
         });
+    }
+
+    @OnClick(R.id.button)
+    public void onBuy(){
+        new AlertDialog.Builder(this)
+                .setTitle("Vous avez votre ticket")
+                .setMessage("Votre achat est confirmé")
+                .setPositiveButton(android.R.string.ok, null)
+                .create().show();
     }
 }

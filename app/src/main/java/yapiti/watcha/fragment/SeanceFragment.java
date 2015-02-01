@@ -17,6 +17,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
+
 import org.lucasr.twowayview.ItemClickSupport;
 import org.lucasr.twowayview.TwoWayLayoutManager;
 import org.lucasr.twowayview.widget.ListLayoutManager;
@@ -34,6 +37,7 @@ import yapiti.watcha.activity.DetailActivity;
 import yapiti.watcha.adapter.SeanceAdapter;
 import yapiti.watcha.entity.Movie;
 import yapiti.watcha.entity.Seance;
+import yapiti.watcha.request.MovieRequest;
 import yapiti.watcha.view.SeanceView;
 
 /**
@@ -43,7 +47,7 @@ import yapiti.watcha.view.SeanceView;
  * Use the {@link SeanceFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SeanceFragment extends Fragment {
+public class SeanceFragment extends BaseFragment {
     @InjectView(R.id.recycler_view) TwoWayView twoWayView;
     private SeanceAdapter adapter;
     private ItemClickSupport support;
@@ -87,11 +91,12 @@ public class SeanceFragment extends Fragment {
         for(Movie movie : list){
             for(Seance seance : movie.getSeances()) {
                 SeanceView.Holder holder=new SeanceView.Holder(movie, seance);
-                adapter.add(holder);
+//                adapter.add(holder);
             }
         }
 
         adapter.sort(new CompareHolder());
+        manager.execute(new MovieRequest(), new ListenGet());
     }
 
     @Override
@@ -154,6 +159,28 @@ public class SeanceFragment extends Fragment {
         @Override
         public int compare(SeanceView.Holder lhs, SeanceView.Holder rhs) {
             return lhs.getSeance().getDate().compareTo(rhs.getSeance().getDate());
+        }
+    }
+
+    private class ListenGet implements RequestListener<MovieRequest.Result> {
+
+        @Override
+        public void onRequestFailure(SpiceException spiceException) {
+
+        }
+
+        @Override
+        public void onRequestSuccess(MovieRequest.Result o) {
+            adapter.clear();
+
+            for(Movie movie : o.getList()){
+                for(Seance seance : movie.getSeances()) {
+                    SeanceView.Holder holder=new SeanceView.Holder(movie, seance);
+                    adapter.add(holder);
+                }
+            }
+
+            adapter.sort(new CompareHolder());
         }
     }
 }

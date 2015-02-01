@@ -26,6 +26,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.logo_home_low);
+        setTitle("");
         setContentView(R.layout.activity_main);
 
         ButterKnife.inject(this);

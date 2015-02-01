@@ -4,14 +4,22 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.util.ArrayList;
 
 /**
  * Created by yapiti on 31/01/15.
  */
+@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonAutoDetect(fieldVisibility= JsonAutoDetect.Visibility.NONE)
 public class Movie implements Parcelable {
     private String title;
     private Uri cover;
+    private Uri bigCover;
     private String author;
     private String description;
     private ArrayList<Seance> seances =new ArrayList<>();
@@ -21,6 +29,7 @@ public class Movie implements Parcelable {
         return title;
     }
 
+    @JsonProperty("name")
     public void setTitle(String title) {
         this.title = title;
     }
@@ -29,8 +38,20 @@ public class Movie implements Parcelable {
         return cover;
     }
 
+    @JsonProperty("poster")
+    @JsonDeserialize(using = UriDeserializer.class)
     public void setCover(Uri cover) {
         this.cover = cover;
+    }
+
+    public Uri getBigCover() {
+        return bigCover;
+    }
+
+    @JsonProperty("cover")
+    @JsonDeserialize(using = UriDeserializer.class)
+    public void setBigCover(Uri bigCover) {
+        this.bigCover = bigCover;
     }
 
     public ArrayList<Seance> getSeances() {
@@ -45,6 +66,7 @@ public class Movie implements Parcelable {
         return author;
     }
 
+    @JsonProperty("realisateur")
     public void setAuthor(String author) {
         this.author = author;
     }
@@ -69,6 +91,7 @@ public class Movie implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.title);
         dest.writeParcelable(this.cover, 0);
+        dest.writeParcelable(this.bigCover, 0);
         dest.writeString(this.author);
         dest.writeString(this.description);
         dest.writeList(this.seances);
@@ -77,6 +100,7 @@ public class Movie implements Parcelable {
     private Movie(Parcel in) {
         this.title = in.readString();
         this.cover = in.readParcelable(Uri.class.getClassLoader());
+        this.bigCover = in.readParcelable(Uri.class.getClassLoader());
         this.author = in.readString();
         this.description = in.readString();
         this.seances=new ArrayList<>();

@@ -3,19 +3,21 @@ package yapiti.watcha.fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
 
 import org.lucasr.twowayview.ItemClickSupport;
 import org.lucasr.twowayview.TwoWayLayoutManager;
@@ -23,15 +25,12 @@ import org.lucasr.twowayview.widget.GridLayoutManager;
 import org.lucasr.twowayview.widget.SpacingItemDecoration;
 import org.lucasr.twowayview.widget.TwoWayView;
 
-import java.util.Date;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import yapiti.watcha.R;
 import yapiti.watcha.activity.DetailActivity;
 import yapiti.watcha.adapter.CoverAdapter;
-import yapiti.watcha.entity.Movie;
-import yapiti.watcha.entity.Seance;
+import yapiti.watcha.request.MovieRequest;
 
 /**
  * A fragment representing a list of Items.
@@ -39,7 +38,7 @@ import yapiti.watcha.entity.Seance;
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * interface.
  */
-public class MovieFragment extends Fragment {
+public class MovieFragment extends BaseFragment {
     @InjectView(R.id.recycler_view) TwoWayView twoWayView;
     private CoverAdapter adapter;
     private ItemClickSupport support;
@@ -62,17 +61,19 @@ public class MovieFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         adapter=new CoverAdapter(getActivity());
+//        for(int i=0; i<40; i++) {
+//            Movie movie=new Movie();
+//            movie.setTitle("Yolo"+i);
+//            movie.setAuthor("Author " + i);
+//            movie.setDescription("Omne omne et tunica circumdedit accepimus qua muros agebatur ablatis armatis ad Caesarem inopinum Caesarem peremptum res iurandi fallaciis sed et statim qua extra omne circumdedit iurandi confirmans communi iurandi.");
+//            movie.setCover(Uri.parse("http://lorempixel.com/400/70"+((int) (Math.random()*5))));
+//            movie.getSeances().add(new Seance(new Date()));
+//
+//            adapter.add(movie);
+//        }
 
-        for(int i=0; i<40; i++) {
-            Movie movie=new Movie();
-            movie.setTitle("Yolo"+i);
-            movie.setAuthor("Author " + i);
-            movie.setDescription("Omne omne et tunica circumdedit accepimus qua muros agebatur ablatis armatis ad Caesarem inopinum Caesarem peremptum res iurandi fallaciis sed et statim qua extra omne circumdedit iurandi confirmans communi iurandi.");
-            movie.setCover(Uri.parse("http://lorempixel.com/400/70"+((int) (Math.random()*5))));
-            movie.getSeances().add(new Seance(new Date()));
+        manager.execute(new MovieRequest(), new ListenGet());
 
-            adapter.add(movie);
-        }
     }
 
     @Nullable
@@ -128,5 +129,19 @@ public class MovieFragment extends Fragment {
         super.onDestroyView();
 
         ButterKnife.reset(this);
+    }
+
+    private class ListenGet implements RequestListener<MovieRequest.Result> {
+
+        @Override
+        public void onRequestFailure(SpiceException spiceException) {
+
+        }
+
+        @Override
+        public void onRequestSuccess(MovieRequest.Result o) {
+            adapter.addAll(o.getList());
+            Log.d("adapter", "size" +adapter.getItemCount());
+        }
     }
 }
