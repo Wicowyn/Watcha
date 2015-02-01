@@ -3,7 +3,12 @@
 
     <color name="red">#ffff0012</color>
     <color name="white">#ffffff</color>
-    <color name="primary">#FFCB1E</color>
+    <color name="white_light">#ffececec</color>
+    <!--<color name="primary">#FFCB1E</color>-->
+    <color name="primary">#555555</color>
+    <color name="primary_light">#777777</color>
+    <color name="primary_dark">#333333</color>
+    <color name="primary_neutral">#ff383838</color>
     <color name="primary_pressed">#ffd7a61e</color>
     <color name="test_1">#ffd70000</color>
     <color name="test_2">#ff00d728</color>

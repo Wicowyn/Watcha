@@ -14,9 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import org.lucasr.twowayview.ItemClickSupport;
@@ -45,16 +43,7 @@ public class MovieFragment extends Fragment {
     @InjectView(R.id.recycler_view) TwoWayView twoWayView;
     private CoverAdapter adapter;
     private ItemClickSupport support;
-    /**
-     * The fragment's ListView/GridView.
-     */
-    private AbsListView mListView;
 
-    /**
-     * The Adapter which will be used to populate the ListView/GridView with
-     * Views.
-     */
-    private ListAdapter mAdapter;
 
     public static MovieFragment newInstance() {
         MovieFragment fragment = new MovieFragment();
@@ -103,7 +92,7 @@ public class MovieFragment extends Fragment {
         twoWayView.setAdapter(adapter);
         twoWayView.setLayoutManager(new GridLayoutManager(TwoWayLayoutManager.Orientation.VERTICAL, 2, 1));
 
-        int dimen=(int) getResources().getDimension(R.dimen.spacing_movie);
+        int dimen=(int) getResources().getDimension(R.dimen.activity_vertical_margin);
         twoWayView.addItemDecoration(new SpacingItemDecoration(dimen, dimen));
 
 

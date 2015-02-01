@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    card_view:cardBackgroundColor="@color/primary_dark"
     card_view:cardUseCompatPadding="true"
     card_view:cardElevation="4dp"
     card_view:cardCornerRadius="1dp">
@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="2dp">
-
 
         <yapiti.watcha.view.CoverImageView
             android:id="@+id/image"
@@ -37,6 +36,7 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:textAppearance="@android:style/TextAppearance.Large"/>
 
             <TextView
@@ -44,6 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title"
+                android:textColor="@color/white"
                 android:textAppearance="@android:style/TextAppearance.Medium"/>
 
             <TextView
@@ -51,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/date"
+                android:textColor="@color/white_light"
                 android:maxLines="2"/>
         </LinearLayout>
     </RelativeLayout>

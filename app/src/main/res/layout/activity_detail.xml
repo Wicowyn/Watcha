@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/primary_dark"
     tools:context="yapiti.watcha.activity.DetailActivity">
     
     <ImageView
@@ -39,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:padding="2dp"
                 android:layout_margin="8dp"
-                android:background="@color/white">
+                android:background="@color/primary_light">
 
                 <yapiti.watcha.view.CoverImageView
                     android:id="@+id/image"
@@ -62,12 +63,14 @@
                     android:layout_height="wrap_content"
                     android:transitionName="transition_date"
                     android:textAppearance="@android:style/TextAppearance.Large"
+                    android:textColor="@color/white"
                     tools:text="12 decembre"/>
 
                 <TextView
                     android:id="@+id/author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
                     android:textAppearance="@android:style/TextAppearance.Medium"
                     tools:text="Mickeal Bay"/>
 
@@ -75,6 +78,7 @@
                     android:id="@+id/synopsis"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white_light"
                     tools:text="Yolo swagg"/>
 
             </LinearLayout>
@@ -85,8 +89,8 @@
         style="@style/Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="60dp"
         android:layout_alignParentBottom="true"
         android:text="Acheter pour 4€"/>

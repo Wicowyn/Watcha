@@ -71,6 +71,8 @@ public class DetailActivity extends ActionBarActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.logo_home);
 
         movie=getIntent().getParcelableExtra(ARG_MAIL);
 

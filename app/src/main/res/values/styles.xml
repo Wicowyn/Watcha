@@ -15,10 +15,11 @@
     <style name="SlidingTabs">
         <item name="pstsShouldExpand">true</item>
         <!--<item name="pstsTabBackground">@drawable/tabs</item>-->
-        <item name="pstsIndicatorColor">@color/primary</item>
+        <item name="pstsIndicatorColor">@color/white_light</item>
+        <item name="android:textColor">@color/white</item>
         <!--<item name="pstsUnderlineColor">@color/primary</item>-->
         <item name="pstsIndicatorHeight">4dp</item>
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/primary</item>
     </style>
 
 </resources>
