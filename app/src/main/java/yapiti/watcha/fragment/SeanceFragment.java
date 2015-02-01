@@ -142,6 +142,13 @@ public class SeanceFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        ButterKnife.reset(this);
+    }
+
     private class CompareHolder implements Comparator<SeanceView.Holder> {
 
         @Override
